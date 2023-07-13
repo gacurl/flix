@@ -1,4 +1,5 @@
 class Movie < ApplicationRecord
+  has_many :reviews, dependent: :destroy
 
   RATINGS = %w(G PG PG-13 R NC-17)
 
@@ -11,8 +12,6 @@ class Movie < ApplicationRecord
   }
   validates :rating, inclusion: { in: RATINGS }
 
-  
-
   def flop?
     total_gross.blank? || total_gross < 225_000_000
   end
@@ -20,5 +19,9 @@ class Movie < ApplicationRecord
   def self.released
     where("released_on < ? ", Time.now ).order("released_on desc")
   end
-  
+
+  def average_stars
+    reviews.average(:stars) || 0.0
+  end
+
 end
