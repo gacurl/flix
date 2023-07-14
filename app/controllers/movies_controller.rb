@@ -14,11 +14,11 @@ class MoviesController < ApplicationController
 
   def update
     @movie = Movie.find(params[:id])      
-    if @movie.update(movie_params)
-      redirect_to @movie, notice: "Movie successfully updated!"
-    else
-      render :edit, status: :unprocessable_entity
-    end
+      if @movie.update(movie_params)
+        redirect_to @movie, notice: "Movie successfully updated!"
+      else
+        render :edit, status: :unprocessable_entity
+      end
   end
 
   def new
