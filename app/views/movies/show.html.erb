@@ -32,9 +32,10 @@
   </div>
 </section>
 
-
-<section class="admin">
-  <%= link_to "Edit Movie", edit_movie_path, class: "button" %>
-  <%= link_to "Delete Movie", movie_path(@movie), class: "button",
-        data: { turbo_method: :delete, turbo_confirm: "Are you certain?" } %>
-</section>
+<% if current_user_admin? %>
+  <section class="admin">
+    <%= link_to "Edit Movie", edit_movie_path, class: "button" %>
+    <%= link_to "Delete Movie", movie_path(@movie), class: "button",
+          data: { turbo_method: :delete, turbo_confirm: "Are you certain?" } %>
+  </section>
+<% end %>
